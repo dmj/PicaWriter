@@ -31,3 +31,6 @@ if (class_exists('Phix_Project\ContractLib\Contract'))
 {
         \Phix_Project\ContractLib\Contract::EnforceWrappedContracts();
 }
+
+// step 5: Set error level to include E_STRICT
+\error_reporting(\E_ALL | \E_STRICT);
