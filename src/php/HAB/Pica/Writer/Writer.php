@@ -56,4 +56,14 @@ abstract class Writer {
    */
   abstract public function write (\HAB\Pica\Record\Record $record);
 
+  /**
+   * Write a single Pica+ field.
+   *
+   * @param  \HAB\Pica\Record\Field $field The Pica+ field to write
+   * @return string|boolean Written field or TRUE if record was written to
+   *         output stream or buffer
+   */
+  abstract public function writeField (\HAB\Pica\Record\Field $field);
+  
+
 }

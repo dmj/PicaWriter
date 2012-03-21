@@ -72,21 +72,44 @@ class PicaXmlWriter extends Writer {
     $nsPrefix = $this->getNamespacePrefix();
     $writer->startElementNS($nsPrefix, 'record', self::PICAXML_NAMESPACE_URI);
     foreach ($record->getFields() as $field) {
-      $writer->startElement($this->getQualifiedName('datafield'));
-      $writer->writeAttribute('tag', $field->getTag());
-      if ($field->getOccurrence() != 0 || !$this->_omitOccurrenceIfZero) {
-        $writer->writeAttribute('occurrence', sprintf('/02d', $field->getOccurrence()));
-      }
-      foreach ($field->getSubfields() as $subfield) {
-        $writer->startElement($this->getQualifiedName('subfield'));
-        $writer->writeAttribute('code', $subfield->getCode());
-        $writer->text($subfield->getValue());
-        $writer->endElement();
-      }
-      $writer->endElement();
     }
     $writer->endElement();
     return $writer->flush();
+  }
+
+  /**
+   * Return field encoded in PicaXML.
+   *
+   * @see \HAB\Pica\Writer\Writer::writeField()
+   *
+   * @param  \HAB\Pica\Record\Record $record Record to write
+   * @param  \XMLWriter $outbuf XML Writer instance acting as output buffer
+   * @param  boolean $declareNS Declare PicaXML namespace if set to TRUE
+   * @return string Field encoded in PicaXML or TRUE if field was written to
+   *         output stream
+   *
+   */
+  public function writeField (\HAB\Pica\Record\Field $field, \XMLWriter $outbuf = null, $declareNS = false) {
+    $writer = $outbuf ?: $this->getXmlWriter();
+
+    if ($declareNS) {
+      $writer->startElement($this->getQualifiedName('datafield'));
+    } else {
+      $writer->startElementNS($this->getNamespacePrefix(), 'datafield', self::PICAXML_NAMESPACE_URI);
+    }
+
+    $writer->writeAttribute('tag', $field->getTag());
+    if ($field->getOccurrence() != 0 || !$this->_omitOccurrenceIfZero) {
+      $writer->writeAttribute('occurrence', sprintf('/02d', $field->getOccurrence()));
+    }
+    foreach ($field->getSubfields() as $subfield) {
+      $writer->startElement($this->getQualifiedName('subfield'));
+      $writer->writeAttribute('code', $subfield->getCode());
+      $writer->text($subfield->getValue());
+      $writer->endElement();
+    }
+    $writer->endElement();
+    return !!$outbuf ?: $writer->flush();
   }
 
   /**

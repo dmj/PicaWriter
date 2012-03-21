@@ -42,4 +42,14 @@ class PicaXmlWriterTest extends \PHPUnit_FrameWork_TestCase {
     $r = new TitleRecord(array(new Field('003@', 0, array(new Subfield('0', 'something')))));
     $this->_writer->write($r);
   }
+
+  public function testWriteField () {
+    $f = new Field('003@', 0, array(new Subfield('0', 'something')));
+    $xml = $this->_writer->writeField($f);
+    $this->assertInternalType('string', $xml);
+  }
+
 }
+// Local Variables:  //
+// c-basic-offset: 2 //
+// End:              //

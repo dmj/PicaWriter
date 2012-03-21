@@ -61,7 +61,7 @@ class PicaPlainWriter extends Writer {
    * @param  \HAB\Pica\Record\Field The Pica+ field
    * @return string Field encoded in PicaPlain
    */
-  protected function writeField (\HAB\Pica\Record\Field $field) {
+  public function writeField (\HAB\Pica\Record\Field $field) {
     $line = $field->getTag();
     if ($field->getOccurrence() != 0 || !$this->_omitOccurrenceIfZero) {
       $line .= sprintf('/%02d', $field->getOccurrence());

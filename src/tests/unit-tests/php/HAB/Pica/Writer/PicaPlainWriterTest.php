@@ -59,4 +59,12 @@ class PicaPlainWriterTest extends \PHPUnit_FrameWork_TestCase {
     $this->assertEquals('003@/10 $0some$$thing', $plain);
   }
 
+  public function testWriteField () {
+    $f = new Field('003@', 10, array(new Subfield('0', 'something')));
+    $this->assertEquals('003@/10 $0something', $this->_writer->writeField($f));
+  }
+
 }
+// Local Variables:  //
+// c-basic-offset: 2 //
+// End:              //
