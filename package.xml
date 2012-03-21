@@ -11,8 +11,7 @@
   <channel>${project.channel}</channel>
   <summary>Classes for writing Pica+ records</summary>
   <description>
-    This package provides classes for writing Pica+ records to PicaXML
-    and PicaPlain.
+This package provides classes for writing Pica+ records to PicaXML and PicaPlain.
   </description>
   <lead>
     <name>David Maus</name>
