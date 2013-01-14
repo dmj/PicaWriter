@@ -68,6 +68,7 @@ class PicaXmlWriter extends Writer
         $nsPrefix = $this->getNamespacePrefix();
         $writer->startElementNS($nsPrefix, 'record', self::PICAXML_NAMESPACE_URI);
         foreach ($record->getFields() as $field) {
+            $this->writeField($field, $writer);
         }
         $writer->endElement();
         return $writer->flush();
@@ -88,9 +89,9 @@ class PicaXmlWriter extends Writer
         $writer = $outbuf ?: $this->getXmlWriter();
 
         if ($declareNS) {
-            $writer->startElement($this->getQualifiedName('datafield'));
-        } else {
             $writer->startElementNS($this->getNamespacePrefix(), 'datafield', self::PICAXML_NAMESPACE_URI);
+        } else {
+            $writer->startElement($this->getQualifiedName('datafield'));
         }
 
         $writer->writeAttribute('tag', $field->getTag());

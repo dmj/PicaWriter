@@ -46,7 +46,7 @@ class PicaXmlWriterTest extends PHPUnit_FrameWork_TestCase
     {
         $r = new TitleRecord(array(new Field('003@', 0, array(new Subfield('0', 'something')))));
         $xml = $this->_writer->write($r);
-        $this->assertEquals('<pica:record xmlns:pica="info:srw/schema/5/picaXML-v1.0"/>', $xml);
+        $this->assertEquals('<pica:record xmlns:pica="info:srw/schema/5/picaXML-v1.0"><pica:datafield tag="003@"><pica:subfield code="0">something</pica:subfield></pica:datafield></pica:record>', $xml);
     }
 
     public function testWriteField ()
