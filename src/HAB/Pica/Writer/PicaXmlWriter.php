@@ -96,7 +96,7 @@ class PicaXmlWriter extends Writer
 
         $writer->writeAttribute('tag', $field->getTag());
         if ($field->getOccurrence() != 0 || !$this->_omitOccurrenceIfZero) {
-            $writer->writeAttribute('occurrence', sprintf('/%02d', $field->getOccurrence()));
+            $writer->writeAttribute('occurrence', sprintf('%02d', $field->getOccurrence()));
         }
         foreach ($field->getSubfields() as $subfield) {
             $writer->startElement($this->getQualifiedName('subfield'));
