@@ -54,7 +54,7 @@ class PicaNormWriter extends Writer
         foreach ($record->getFields() as $field) {
             $buffer .= $this->writeField($field);
         }
-        $buffer;
+        return $buffer;
     }
 
     /**
