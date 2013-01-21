@@ -23,6 +23,10 @@
 
 namespace HAB\Pica\Writer;
 
+use HAB\Pica\Record\Subfield;
+use HAB\Pica\Record\Record;
+use HAB\Pica\Record\Field;
+
 class PicaNormWriter extends Writer
 {
     /**
