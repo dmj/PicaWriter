@@ -50,10 +50,10 @@ class PicaNormWriter extends Writer
      */
     public function write (Record $record)
     {
-        $buffer = self::RECORD_SEPARATOR;
         foreach ($record->getFields() as $field) {
             $buffer .= $this->writeField($field);
         }
+        $buffer .= self::RECORD_SEPARATOR;
         return $buffer;
     }
 
@@ -65,15 +65,15 @@ class PicaNormWriter extends Writer
      */
     public function writeField (Field $field)
     {
-        $buffer  = self::FIELD_SEPARATOR;
-        $buffer .= $field->getTag();
+        $buffer = $field->getTag();
         if ($field->getOccurrence()) {
-            $buffer .= sprintf('%02d', $field->getOccurrence());
+            $buffer .= sprintf('/%02d', $field->getOccurrence());
         }
-        $buffer .= ' ' . self::SUBFIELD_SEPARATOR;
+        $buffer .= ' ';
         foreach ($field->getSubfields() as $subfield) {
             $buffer .= self::SUBFIELD_SEPARATOR . $subfield->getCode() . $subfield->getValue();
         }
+        $buffer .= self::FIELD_SEPARATOR;
         return $buffer;
     }
 }
